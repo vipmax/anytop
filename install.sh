@@ -2,18 +2,18 @@
 
 set -eu
 
-REPO="${ANYPROC_REPO:-vipmax/anyproc}"
-VERSION="${ANYPROC_VERSION:-latest}"
-PREFIX="${ANYPROC_INSTALL_DIR:-}"
+REPO="${ANYTOP_REPO:-vipmax/anytop}"
+VERSION="${ANYTOP_VERSION:-latest}"
+PREFIX="${ANYTOP_INSTALL_DIR:-}"
 
 usage() {
   cat <<'USAGE'
 Usage: install.sh [--version TAG] [--prefix DIR] [--repo OWNER/REPO]
 
 Environment variables:
-  ANYPROC_REPO         GitHub repository, default: vipmax/anyproc
-  ANYPROC_VERSION      Release tag to install, default: latest
-  ANYPROC_INSTALL_DIR  Installation directory, default: ~/.local/bin or /usr/local/bin for root
+  ANYTOP_REPO         GitHub repository, default: vipmax/anytop
+  ANYTOP_VERSION      Release tag to install, default: latest
+  ANYTOP_INSTALL_DIR  Installation directory, default: ~/.local/bin or /usr/local/bin for root
 USAGE
 }
 
@@ -48,12 +48,12 @@ arch="$(uname -m)"
 
 case "$os" in
   Darwin)
-    asset="anyproc-universal-apple-darwin.tar.gz"
+    asset="anytop-universal-apple-darwin.tar.gz"
     ;;
   Linux)
     case "$arch" in
       x86_64|amd64)
-        asset="anyproc-linux.tar.gz"
+        asset="anytop-linux.tar.gz"
         ;;
       *)
         echo "Unsupported Linux architecture: $arch" >&2
@@ -108,21 +108,21 @@ fi
 
 tar -xzf "$archive" -C "$extract_dir"
 
-if [ ! -f "$extract_dir/anyproc" ]; then
-  echo "Archive did not contain expected binary: anyproc" >&2
+if [ ! -f "$extract_dir/anytop" ]; then
+  echo "Archive did not contain expected binary: anytop" >&2
   exit 1
 fi
 
-install_bin="$PREFIX/anyproc"
-cp "$extract_dir/anyproc" "$install_bin"
+install_bin="$PREFIX/anytop"
+cp "$extract_dir/anytop" "$install_bin"
 chmod 755 "$install_bin"
 
-echo "Installed anyproc to $install_bin"
+echo "Installed anytop to $install_bin"
 
-if command -v anyproc >/dev/null 2>&1; then
-  echo "anyproc is already available in PATH."
+if command -v anytop >/dev/null 2>&1; then
+  echo "anytop is already available in PATH."
 else
-  echo "anyproc is not in PATH yet."
+  echo "anytop is not in PATH yet."
   shell_name="$(basename "${SHELL:-}")"
   case "$shell_name" in
     zsh)

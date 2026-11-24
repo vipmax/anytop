@@ -14,7 +14,7 @@ pub fn ui(f: &mut ratatui::Frame, app: &mut App) {
         format!("Filter: {}  | Enter/Esc: finish | q: quit", app.search)
     } else {
         format!(
-            "f - filter:{} | u - update | c/m/p - sort | Enter - Detailed View | v - select text {} | ctrl+q quit anyproc",
+            "f - filter:{} | u - update | c/m/p - sort | Enter - Detailed View | v - select text {} | ctrl+q quit anytop",
             app.search,
             if app.text_select_mode { "ON" } else { "OFF" }
         )

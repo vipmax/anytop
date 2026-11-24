@@ -2,7 +2,7 @@ mod state;
 mod ui;
 
 use std::io;
-use std::time::{Duration, Instant};
+use std::time::{Duration, Instant, SystemTime};
 
 use crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind, KeyModifiers, MouseButton, MouseEvent, MouseEventKind};
 use ratatui::backend::CrosstermBackend;
@@ -37,6 +37,7 @@ pub fn run() -> io::Result<()> {
 fn run_app(terminal: &mut Terminal<CrosstermBackend<io::Stdout>>) -> io::Result<()> {
     let mut app = App::new();
     let mut last_tick = Instant::now();
+    let mut last_wall = SystemTime::now();
     let mut mouse_capture_enabled = true;
 
     loop {
@@ -58,8 +59,17 @@ fn run_app(terminal: &mut Terminal<CrosstermBackend<io::Stdout>>) -> io::Result<
         }
 
         if last_tick.elapsed() >= TICK_RATE {
-            app.refresh_rows();
+            let wall_jump = last_wall
+                .elapsed()
+                .map(|d| d > TICK_RATE * 5)
+                .unwrap_or(true);
+            if wall_jump {
+                app.hard_refresh();
+            } else {
+                app.refresh_rows();
+            }
             last_tick = Instant::now();
+            last_wall = SystemTime::now();
         }
     }
 
@@ -114,7 +124,7 @@ fn handle_key_event(
             app.input_mode = true;
             app.search_cursor = app.search.len();
         }
-        KeyCode::Char('u') => app.refresh_rows(),
+        KeyCode::Char('u') => app.hard_refresh(),
         KeyCode::Char('c') => {
             app.sort_mode = SortMode::Cpu;
             app.refresh_rows();

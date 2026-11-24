@@ -60,6 +60,11 @@ impl App {
         app
     }
 
+    pub fn hard_refresh(&mut self) {
+        self.sys = System::new();
+        self.refresh_rows();
+    }
+
     pub fn refresh_rows(&mut self) {
         self.sys.refresh_processes(ProcessesToUpdate::All, true);
 

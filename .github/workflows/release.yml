@@ -33,14 +33,14 @@ jobs:
       - name: Package as tar.gz
         run: |
           mkdir -p dist
-          strip target/x86_64-unknown-linux-musl/release/anyproc
-          cp target/x86_64-unknown-linux-musl/release/anyproc dist/
-          tar -czf anyproc-linux.tar.gz -C dist anyproc
+          strip target/x86_64-unknown-linux-musl/release/anytop
+          cp target/x86_64-unknown-linux-musl/release/anytop dist/
+          tar -czf anytop-linux.tar.gz -C dist anytop
 
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
-          files: anyproc-linux.tar.gz
+          files: anytop-linux.tar.gz
 
   build-macos:
     name: Build for macOS Universal
@@ -66,16 +66,16 @@ jobs:
         run: |
           mkdir -p dist
           lipo -create \
-            target/aarch64-apple-darwin/release/anyproc \
-            target/x86_64-apple-darwin/release/anyproc \
-            -output dist/anyproc
+            target/aarch64-apple-darwin/release/anytop \
+            target/x86_64-apple-darwin/release/anytop \
+            -output dist/anytop
 
       - name: Package as tar.gz
         run: |
-          strip dist/anyproc
-          tar -czf anyproc-universal-apple-darwin.tar.gz -C dist anyproc
+          strip dist/anytop
+          tar -czf anytop-universal-apple-darwin.tar.gz -C dist anytop
 
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
-          files: anyproc-universal-apple-darwin.tar.gz
+          files: anytop-universal-apple-darwin.tar.gz

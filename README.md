@@ -1,8 +1,8 @@
-# anyproc
+# anytop
 
 A lightweight terminal process manager built with Rust (`ratatui` + `crossterm`).
 
-![anyproc screenshot](./screen.png)
+![anytop screenshot](./screen.png)
 
 ## Features
 
@@ -18,26 +18,26 @@ A lightweight terminal process manager built with Rust (`ratatui` + `crossterm`)
 ### Quick install from GitHub Releases
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vipmax/anyproc/master/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/vipmax/anytop/master/install.sh | sh
 ```
 
 Optional examples:
 
 ```bash
 # Install a specific version tag
-curl -fsSL https://raw.githubusercontent.com/vipmax/anyproc/master/install.sh | sh -s -- --version v0.1.0
+curl -fsSL https://raw.githubusercontent.com/vipmax/anytop/master/install.sh | sh -s -- --version v0.2.0
 
 # Install to a custom directory
-curl -fsSL https://raw.githubusercontent.com/vipmax/anyproc/master/install.sh | sh -s -- --prefix ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/vipmax/anytop/master/install.sh | sh -s -- --prefix ~/.local/bin
 ```
 
 ### Build from source
 
 ```bash
-git clone https://github.com/vipmax/anyproc.git
-cd anyproc
+git clone https://github.com/vipmax/anytop.git
+cd anytop
 cargo build --release
-./target/release/anyproc
+./target/release/anytop
 ```
 
 ## Keybindings
